@@ -1,0 +1,48 @@
+Identifier: local.jss.Zoom
+Input:
+  APP_PATH: zoom.us.app
+  BUNDLE_ID: us.zoom.xos
+  CATEGORY: Autopkg
+  DOWNLOAD_URL: https://zoom.us/client/latest/ZoomInstallerIT.pkg
+  GROUP_NAME: Update-Smart-%SOFTWARETITLE%
+  SOFTWARETITLE: Zoom
+  NAME: zoom.us
+  POLICY_CATEGORY: Trigger Only
+  PROD_NAME: '%SOFTWARETITLE%'
+  GROUP_TEMPLATE: 'SmartGroupTemplate-CFBundleVersion.xml'
+  POLICY_TEMPLATE: 'PolicyTemplate_TriggerOnly.xml'
+  SELFSERVPOLICY_CATEGORY: 'Managed Software Center'
+  SELFSERVPOLICY_TEMPLATE: 'PolicyTemplate_SelfServe.all.xml'
+  SELF_SERVICE_DESCRIPTION: The Zoom app provides cloud-hosted video conferencing, plus online meetings and group messaging.
+  SELF_SERVICE_ICON: Zoom.png
+  USER_AGENT: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_3) AppleWebKit/536.28.10 (KHTML, like Gecko) Version/6.0.3 Safari/536.28.10
+MinimumVersion: 1.0.4
+ParentRecipe: com.github.homebysix.pkg.Zoom
+Process:
+- Arguments:
+    category: '%CATEGORY%'
+    groups:
+    - name: '%GROUP_NAME%'
+      smart: true
+      template_path: '%GROUP_TEMPLATE%'
+    policy_category: '%POLICY_CATEGORY%'
+    policy_template: '%POLICY_TEMPLATE%'
+    prod_name: '%SOFTWARETITLE%'
+    self_service_description: '%SELF_SERVICE_DESCRIPTION%'
+    self_service_icon: '%SELF_SERVICE_ICON%'
+  Comment: Trigger Only policy for all, for techs or other services. Group Required to prevent clashes.
+  Processor: JSSImporter
+- Arguments:
+    groups:
+    - name: ''
+      smart: true
+      template_path: ''
+    pkg_path: '%pkg_path%'
+    policy_category: '%SELFSERVPOLICY_CATEGORY%'
+    policy_template: '%SELFSERVPOLICY_TEMPLATE%'
+    prod_name: '%SOFTWARETITLE%'
+    self_service_description: '%SELF_SERVICE_DESCRIPTION%'
+    self_service_icon: '%SELF_SERVICE_ICON%'
+    version: '%version%'
+  Comment: Self Service install policy for all, group is irrelavant
+  Processor: JSSImporter

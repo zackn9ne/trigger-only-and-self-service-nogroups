@@ -1,0 +1,45 @@
+Identifier: local.jss.MicrosoftTeams
+Input:
+  CATEGORY: Autopkg-MS 
+  POLICY_CATEGORY: Trigger Only
+  GROUP_NAME: Update-Smart-%NAME%
+  GROUP_TEMPLATE: 'SmartGroupTemplate_AppnameVersion.xml'
+  POLICY_TEMPLATE: 'PolicyTemplate_TriggerOnly.xml'
+  SELFSERVPOLICY_CATEGORY: 'Managed Software Center'
+  SELFSERVPOLICY_TEMPLATE: 'PolicyTemplate_SelfServe.all.xml'
+  NAME: Microsoft Teams
+  PRODUCTID: '869428'
+  DOWNLOADURL: https://go.microsoft.com/fwlink/?linkid=%PRODUCTID%
+  SELF_SERVICE_DESCRIPTION: Microsoft Teams is the new chat-centered workspace in Office 365. Keep all your content, tools, people, and conversations together in one place.
+  SELF_SERVICE_ICON: '%RECIPE_DIR%/MicrosoftTeams.png'
+  SOFTWARETITLE: Teams
+  VENDOR: Microsoft
+ParentRecipe: com.github.rtrouton.pkg.microsoftteams
+Process:
+- Arguments:
+    category: '%CATEGORY%'
+    groups:
+    - name: '%GROUP_NAME%'
+      smart: true
+      template_path: '%GROUP_TEMPLATE%'
+    policy_category: '%POLICY_CATEGORY%'
+    policy_template: '%POLICY_TEMPLATE%'
+    prod_name: '%NAME%'
+    self_service_description: '%SELF_SERVICE_DESCRIPTION%'
+    self_service_icon: '%SELF_SERVICE_ICON%'
+  Comment: Trigger Only policy for all, for techs or other services. Group Required to prevent clashes.
+  Processor: JSSImporter
+- Arguments:
+    groups:
+    - name: ''
+      smart: true
+      template_path: ''
+    pkg_path: '%pkg_path%'
+    policy_category: '%SELFSERVPOLICY_CATEGORY%'
+    policy_template: '%SELFSERVPOLICY_TEMPLATE%'
+    prod_name: '%NAME%'
+    self_service_description: '%SELF_SERVICE_DESCRIPTION%'
+    self_service_icon: '%SELF_SERVICE_ICON%'
+    version: '%version%'
+  Comment: Self Service install policy for all, group is irrelavant
+  Processor: JSSImporter

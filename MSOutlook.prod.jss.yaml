@@ -1,0 +1,47 @@
+Identifier: local.jss.MicrosoftOutlook365
+Input:
+  CATEGORY: Autopkg-MS
+  POLICY_CATEGORY: Trigger Only
+  ICON: '%RECIPE_DIR%/MicrosoftOutlook365.png'
+  SELF_SERVICE_ICON: '%RECIPE_DIR%/MicrosoftOutlook365.png'
+  TRIGGER_NAME: '%SOFTWARETITLE%-install'
+  GROUP_TEMPLATE: 'SmartGroupTemplate_AppnameVersion.xml'
+  POLICY_TEMPLATE: 'PolicyTemplate_TriggerOnly.xml'
+  SELFSERVPOLICY_CATEGORY: 'Managed Software Center'
+  SELFSERVPOLICY_TEMPLATE: 'PolicyTemplate_SelfServe.all.xml'
+  PRODUCTID: '525137'
+  SOFTWARETITLE: Outlook
+  VENDOR: Microsoft
+  DESCRIPTION: Microsoft Outlook is a comprehensive personal information manager. Although often used as an email app, it also includes a calendar, task manager, contact manager, and many other features.
+  DOWNLOADURL: https://go.microsoft.com/fwlink/?linkid=%PRODUCTID%
+  GROUP_NAME: Update-Smart-%NAME%
+  NAME: Microsoft Outlook
+ParentRecipe: com.github.rtrouton.pkg.microsoftoutlook365
+Process:
+- Arguments:
+    category: '%CATEGORY%'
+    groups:
+    - name: '%GROUP_NAME%'
+      smart: true
+      template_path: '%GROUP_TEMPLATE%'
+    policy_category: '%POLICY_CATEGORY%'
+    policy_template: '%POLICY_TEMPLATE%'
+    prod_name: '%NAME%'
+    self_service_description: '%SELF_SERVICE_DESCRIPTION%'
+    self_service_icon: '%SELF_SERVICE_ICON%'
+  Comment: Trigger Only policy for all, for techs or other services. Group Required to prevent clashes.
+  Processor: JSSImporter
+- Arguments:
+    groups:
+    - name: ''
+      smart: true
+      template_path: ''
+    pkg_path: '%pkg_path%'
+    policy_category: '%SELFSERVPOLICY_CATEGORY%'
+    policy_template: '%SELFSERVPOLICY_TEMPLATE%'
+    prod_name: '%NAME%'
+    self_service_description: '%SELF_SERVICE_DESCRIPTION%'
+    self_service_icon: '%SELF_SERVICE_ICON%'
+    version: '%version%'
+  Comment: Self Service install policy for all, group is irrelavant
+  Processor: JSSImporter

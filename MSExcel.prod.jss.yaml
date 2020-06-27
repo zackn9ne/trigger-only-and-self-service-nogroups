@@ -1,0 +1,47 @@
+Identifier: local.jss.MicrosoftExcel365
+Input:
+  CATEGORY: Autopkg
+  TRIGGER_NAME: '%SOFTWARETITLE%-install'
+  POLICY_CATEGORY: Trigger Only
+  GROUP_NAME: Update-Smart-%SOFTWARETITLE%
+  GROUP_TEMPLATE: 'SmartGroupTemplate_AppnameVersion.xml'
+  POLICY_TEMPLATE: 'PolicyTemplate_TriggerOnly.xml'
+  SELFSERVPOLICY_CATEGORY: 'Managed Software Center'
+  SELFSERVPOLICY_TEMPLATE: 'PolicyTemplate_SelfServe.all.xml'
+  DESCRIPTION: Microsoft Excel is a spreadsheet application featuring calculation, graphing tools, PivotTables, and a macro programming language called Visual Basic for Applications.
+  DOWNLOADURL: https://go.microsoft.com/fwlink/?linkid=%PRODUCTID%
+  ICON: '%RECIPE_DIR%/MicrosoftExcel365.png'
+  SELF_SERVICE_ICON: '%RECIPE_DIR%/MicrosoftExcel365.png'
+  NAME: Microsoft Excel
+  PRODUCTID: '525135'
+  SOFTWARETITLE: Excel
+  VENDOR: Microsoft
+ParentRecipe: com.github.rtrouton.pkg.microsoftexcel365
+Process:
+- Arguments:
+    category: '%CATEGORY%'
+    groups:
+    - name: '%GROUP_NAME%'
+      smart: true
+      template_path: '%GROUP_TEMPLATE%'
+    policy_category: '%POLICY_CATEGORY%'
+    policy_template: '%POLICY_TEMPLATE%'
+    prod_name: '%NAME%'
+    self_service_description: '%SELF_SERVICE_DESCRIPTION%'
+    self_service_icon: '%SELF_SERVICE_ICON%'
+  Comment: Trigger Only policy for all, for techs or other services. Group Required to prevent clashes.
+  Processor: JSSImporter
+- Arguments:
+    groups:
+    - name: ''
+      smart: true
+      template_path: ''
+    pkg_path: '%pkg_path%'
+    policy_category: '%SELFSERVPOLICY_CATEGORY%'
+    policy_template: '%SELFSERVPOLICY_TEMPLATE%'
+    prod_name: '%NAME%'
+    self_service_description: '%SELF_SERVICE_DESCRIPTION%'
+    self_service_icon: '%SELF_SERVICE_ICON%'
+    version: '%version%'
+  Comment: Self Service install policy for all, group is irrelavant
+  Processor: JSSImporter

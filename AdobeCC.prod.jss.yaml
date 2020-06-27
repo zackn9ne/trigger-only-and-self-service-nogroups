@@ -1,0 +1,45 @@
+Identifier: local.jss.AdobeCreativeCloudInstaller
+Input:
+  CATEGORY: Autopkg
+  NAME: Adobe Creative Cloud
+  POLICY_CATEGORY: Trigger Only
+  GROUP_NAME: Update-Smart-%SOFTWARETITLE%
+  GROUP_TEMPLATE: 'SmartGroupTemplate_AppnameVersion.xml'
+  POLICY_TEMPLATE: 'PolicyTemplate_TriggerOnly.xml'
+  SELFSERVPOLICY_CATEGORY: 'Managed Software Center'
+  SELFSERVPOLICY_TEMPLATE: 'PolicyTemplate_SelfServe.all.xml'
+  SEARCH_PATTERN: (?P<url>https://ccmdl.adobe.com/AdobeProducts/KCCC/CCD/.*?/osx10/ACCC.*?.dmg)
+  SEARCH_URL: https://helpx.adobe.com/download-install/kb/creative-cloud-desktop-app-download.html
+  SELF_SERVICE_DESCRIPTION: Access Adobe apps from the cloud with a monthly fee.
+  SELF_SERVICE_ICON: AdobeCreativeCloudInstaller.png
+  SOFTWARETITLE: AdobeCC
+  VENDOR: Adobe
+ParentRecipe: com.github.rtrouton.pkg.AdobeCreativeCloudInstaller
+Process:
+- Arguments:
+    category: '%CATEGORY%'
+    groups:
+    - name: ''
+      smart: true
+      template_path: ''
+    policy_category: '%POLICY_CATEGORY%'
+    policy_template: '%POLICY_TEMPLATE%'
+    prod_name: '%NAME%'
+    self_service_description: '%SELF_SERVICE_DESCRIPTION%'
+    self_service_icon: '%SELF_SERVICE_ICON%'
+  Comment: Trigger Only Policy. Group Nulled
+  Processor: JSSImporter
+- Arguments:
+    groups:
+    - name: ''
+      smart: true
+      template_path: ''
+    pkg_path: '%pkg_path%'
+    policy_category: '%SELFSERVPOLICY_CATEGORY%'
+    policy_template: '%SELFSERVPOLICY_TEMPLATE%'
+    prod_name: '%NAME%'
+    self_service_description: '%SELF_SERVICE_DESCRIPTION%'
+    self_service_icon: '%SELF_SERVICE_ICON%'
+    version: '%version%'
+  Comment: Self Service Policy. Group Nulled
+  Processor: JSSImporter

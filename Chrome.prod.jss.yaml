@@ -1,0 +1,46 @@
+Identifier: local.jss.Google Chrome
+Input:
+  CATEGORY: Autopkg
+  DOWNLOAD_URL: https://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg
+  GROUP_NAME: Update-Smart-%SOFTWARETITLE%
+  MESSAGE_FINISH: Chrome was just Installed.
+  NAME: Google Chrome
+  OS_REQUIREMENTS: 10.15.x,10.14.x,10.13.x,10.12.x,10.11.x,10.10.x
+  POLICY_CATEGORY: Trigger Only
+  GROUP_TEMPLATE: 'SmartGroupTemplate_AppnameVersion.xml'
+  POLICY_TEMPLATE: 'PolicyTemplate_TriggerOnly.xml'
+  SELFSERVPOLICY_CATEGORY: 'Managed Software Center'
+  SELFSERVPOLICY_TEMPLATE: 'PolicyTemplate_SelfServe.all.xml'
+  SELF_SERVICE_DESCRIPTION: Google Chrome is a browser that combines a minimal design with sophisticated technology to make the web faster, safer, and easier.
+  SELF_SERVICE_ICON: Google Chrome.png
+  SOFTWARETITLE: Chrome
+MinimumVersion: 1.0.4
+ParentRecipe: com.github.autopkg.pkg.googlechrome
+Process:
+- Arguments:
+    category: '%CATEGORY%'
+    groups:
+    - name: '%GROUP_NAME%'
+      smart: true
+      template_path: '%GROUP_TEMPLATE%'
+    policy_category: '%POLICY_CATEGORY%'
+    policy_template: '%POLICY_TEMPLATE%'
+    prod_name: '%NAME%'
+    self_service_description: '%SELF_SERVICE_DESCRIPTION%'
+    self_service_icon: '%SELF_SERVICE_ICON%'
+  Comment: Trigger Only policy for all, for techs or other services. Group Required to prevent clashes.
+  Processor: JSSImporter
+- Arguments:
+    groups:
+    - name: ''
+      smart: true
+      template_path: ''
+    pkg_path: '%pkg_path%'
+    policy_category: '%SELFSERVPOLICY_CATEGORY%'
+    policy_template: '%SELFSERVPOLICY_TEMPLATE%'
+    prod_name: '%NAME%'
+    self_service_description: '%SELF_SERVICE_DESCRIPTION%'
+    self_service_icon: '%SELF_SERVICE_ICON%'
+    version: '%version%'
+  Comment: Self Service install policy for all, group is irrelavant
+  Processor: JSSImporter

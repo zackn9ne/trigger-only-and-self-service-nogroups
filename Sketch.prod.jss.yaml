@@ -1,0 +1,47 @@
+Identifier: local.jss.Sketch
+Input:
+  GROUP_NAME: Update-Smart-%PRODUCTNAME%
+  NAME: Sketch
+  OS_REQUIREMENTS: 10.15.x,10.14.x,10.13.6,10.13.5,10.13.4
+  PRODUCTNAME: Sketch
+  SELF_SERVICE_DESCRIPTION: Vector drawing application.
+  SELF_SERVICE_ICON: '%NAME%.png'
+  SOFTWARETITLE: Sketch
+  SPARKLE_FEED_URL: https://www.sketchapp.com/appcast3.xml
+  USER_AGENT: Sketch/3.3.2 Sparkle/e759c10
+  CATEGORY: Autopkg
+  POLICY_CATEGORY: Trigger Only
+  GROUP_TEMPLATE: 'SmartGroupTemplate_AppnameVersion.xml'
+  POLICY_TEMPLATE: 'PolicyTemplate_TriggerOnly.xml'
+  SELFSERVPOLICY_CATEGORY: 'Managed Software Center'
+  SELFSERVPOLICY_TEMPLATE: 'PolicyTemplate_SelfServe.all.xml'
+MinimumVersion: 1.0.4
+ParentRecipe: com.github.homebysix.pkg.Sketch
+Process:
+- Arguments:
+    category: '%CATEGORY%'
+    groups:
+    - name: '%GROUP_NAME%'
+      smart: true
+      template_path: '%GROUP_TEMPLATE%'
+    policy_category: '%POLICY_CATEGORY%'
+    policy_template: '%POLICY_TEMPLATE%'
+    prod_name: '%NAME%'
+    self_service_description: '%SELF_SERVICE_DESCRIPTION%'
+    self_service_icon: '%SELF_SERVICE_ICON%'
+  Comment: Trigger Only policy for all, for techs or other services. Group Required to prevent clashes.
+  Processor: JSSImporter
+- Arguments:
+    groups:
+    - name: ''
+      smart: true
+      template_path: ''
+    pkg_path: '%pkg_path%'
+    policy_category: '%SELFSERVPOLICY_CATEGORY%'
+    policy_template: '%SELFSERVPOLICY_TEMPLATE%'
+    prod_name: '%NAME%'
+    self_service_description: '%SELF_SERVICE_DESCRIPTION%'
+    self_service_icon: '%SELF_SERVICE_ICON%'
+    version: '%version%'
+  Comment: Self Service install policy for all, group is irrelavant
+  Processor: JSSImporter

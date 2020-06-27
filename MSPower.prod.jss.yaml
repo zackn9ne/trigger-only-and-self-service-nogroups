@@ -1,0 +1,47 @@
+Identifier: local.jss.MicrosoftPowerPoint365
+Input:
+  CATEGORY: Autopkg-MS
+  GROUP_NAME: Update-Smart-%NAME%
+  POLICY_CATEGORY: Trigger Only
+  TRIGGER_NAME: '%SOFTWARETITLE%-install'
+  GROUP_TEMPLATE: 'SmartGroupTemplate_AppnameVersion.xml'
+  POLICY_TEMPLATE: 'PolicyTemplate_TriggerOnly.xml'
+  SELFSERVPOLICY_CATEGORY: 'Managed Software Center'
+  SELFSERVPOLICY_TEMPLATE: 'PolicyTemplate_SelfServe.all.xml'
+  NAME: Microsoft PowerPoint
+  DESCRIPTION: Microsoft PowerPoint allows the creation and presentation of professional slide decks.
+  DOWNLOADURL: https://go.microsoft.com/fwlink/?linkid=%PRODUCTID%
+  PRODUCTID: '525136'
+  SOFTWARETITLE: PowerPoint
+  VENDOR: Microsoft
+  ICON: '%RECIPE_DIR%/MicrosoftPowerPoint365.png'
+  SELF_SERVICE_ICON: '%RECIPE_DIR%/MicrosoftPowerPoint365.png'
+ParentRecipe: com.github.rtrouton.pkg.microsoftpowerpoint365
+Process:
+- Arguments:
+    category: '%CATEGORY%'
+    groups:
+    - name: '%GROUP_NAME%'
+      smart: true
+      template_path: '%GROUP_TEMPLATE%'
+    policy_category: '%POLICY_CATEGORY%'
+    policy_template: '%POLICY_TEMPLATE%'
+    prod_name: '%NAME%'
+    self_service_description: '%SELF_SERVICE_DESCRIPTION%'
+    self_service_icon: '%SELF_SERVICE_ICON%'
+  Comment: Trigger Only policy for all, for techs or other services. Group Required to prevent clashes.
+  Processor: JSSImporter
+- Arguments:
+    groups:
+    - name: ''
+      smart: true
+      template_path: ''
+    pkg_path: '%pkg_path%'
+    policy_category: '%SELFSERVPOLICY_CATEGORY%'
+    policy_template: '%SELFSERVPOLICY_TEMPLATE%'
+    prod_name: '%NAME%'
+    self_service_description: '%SELF_SERVICE_DESCRIPTION%'
+    self_service_icon: '%SELF_SERVICE_ICON%'
+    version: '%version%'
+  Comment: Self Service install policy for all, group is irrelavant
+  Processor: JSSImporter

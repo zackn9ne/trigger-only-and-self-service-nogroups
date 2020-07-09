@@ -8,14 +8,14 @@ Input:
   POLICY_TEMPLATE: 'PolicyTemplate_TriggerOnly.xml'
   SELFSERVPOLICY_CATEGORY: 'Managed Software Center'
   SELFSERVPOLICY_TEMPLATE: 'PolicyTemplate_SelfServe.all.xml'
-  NAME: Microsoft PowerPoint
   DESCRIPTION: Microsoft PowerPoint allows the creation and presentation of professional slide decks.
+  ICON: '%RECIPE_DIR%/MicrosoftPowerPoint365.png'
+  SELF_SERVICE_ICON: '%RECIPE_DIR%/MicrosoftPowerPoint365.png'
+  NAME: Microsoft PowerPoint  
   DOWNLOADURL: https://go.microsoft.com/fwlink/?linkid=%PRODUCTID%
   PRODUCTID: '525136'
   SOFTWARETITLE: PowerPoint
   VENDOR: Microsoft
-  ICON: '%RECIPE_DIR%/MicrosoftPowerPoint365.png'
-  SELF_SERVICE_ICON: '%RECIPE_DIR%/MicrosoftPowerPoint365.png'
 ParentRecipe: com.github.rtrouton.pkg.microsoftpowerpoint365
 Process:
 - Arguments:

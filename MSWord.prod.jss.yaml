@@ -1,14 +1,8 @@
 Identifier: local.jss.MicrosoftWord365
 Input:
   CATEGORY: Autopkg-MS
-  DESCRIPTION: Microsoft Word 
-  DOWNLOADURL: https://go.microsoft.com/fwlink/?linkid=%PRODUCTID%
   GROUP_NAME: Update-Smart-%NAME%
-  NAME: Microsoft Word
   POLICY_CATEGORY: Trigger Only
-  PRODUCTID: '525136'
-  SOFTWARETITLE: Word
-  VENDOR: Microsoft
   ICON: '%RECIPE_DIR%/MicrosoftWord365.png'
   SELF_SERVICE_ICON: '%RECIPE_DIR%/MicrosoftWord365.png'
   TRIGGER_NAME: '%SOFTWARETITLE%-install'
@@ -16,6 +10,12 @@ Input:
   POLICY_TEMPLATE: 'PolicyTemplate_TriggerOnly.xml'
   SELFSERVPOLICY_CATEGORY: 'Managed Software Center'
   SELFSERVPOLICY_TEMPLATE: 'PolicyTemplate_SelfServe.all.xml'
+  NAME: Microsoft Word  
+  PRODUCTID: '525136'
+  SOFTWARETITLE: Word
+  VENDOR: Microsoft
+  DESCRIPTION: Microsoft Word 
+  DOWNLOADURL: https://go.microsoft.com/fwlink/?linkid=%PRODUCTID%
 ParentRecipe: com.github.rtrouton.pkg.microsoftword365
 Process:
 - Arguments:

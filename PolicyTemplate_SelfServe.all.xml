@@ -32,7 +32,7 @@
     </self_service>
     <user_interaction>
         <message_start></message_start>
-        <message_finish>%SOFTWARETITLE% was just installed</message_finish>
+        <message_finish>%SOFTWARETITLE% was just installed/updated via Self Service</message_finish>
     </user_interaction>
     <maintenance>
         <recon>true</recon>
